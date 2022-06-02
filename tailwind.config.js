@@ -33,6 +33,7 @@ module.exports = {
         200: "#DFE3FA",
         100: "#F8F8FB",
       },
+      grayBlack: "#373B53",
     },
     fontSize: {
       "body-1": ["12px", { lineHeight: "15px", letterSpacing: "-0.25px" }],

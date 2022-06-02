@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-modal/lib/components/Modal";
 import SignedUser from "./SignedUser.jsx";
 import UnsignedUser from "./UnsignedUser.jsx";
+import Button from "./components/Button.jsx";
 
 Modal.setAppElement("#main");
 
