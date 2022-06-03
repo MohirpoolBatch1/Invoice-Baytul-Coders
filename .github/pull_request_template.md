@@ -1,4 +1,4 @@
-**Issue #:** [JIRA-1234](https://jira.thomsonreuters.com/browse/DUE-1234)
+**Issue #:** [JIRA-1234](https://mohirpool.atlassian.net/browse/IT-1234)
 
 ## PR turi
 
