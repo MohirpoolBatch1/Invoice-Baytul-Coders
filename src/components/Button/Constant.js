@@ -1,0 +1,5 @@
+export const primary = 'primary'
+export const primaryAdd = 'primary-add'
+export const danger = 'danger'
+export const edit = 'edit'
+export const cancel = 'cancel'
