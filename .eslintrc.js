@@ -3,28 +3,17 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['airbnb-base', 'prettier'],
   parser: '@babel/eslint-parser',
+  extends: ['airbnb-base', 'prettier', 'eslint:recommended', 'react-app'],
   parserOptions: {
     ecmaVersion: 12,
     sourceType: 'module',
-    requireConfigFile: false,
-    babelOptions: {
-      presets: ['@babel/preset-react'],
-    },
   },
   plugins: ['prettier'],
   rules: {
-    'prettier/prettier': [
-      'error',
-      {
-        endOfLine: 'auto',
-      },
-    ],
-    'no-unused-vars': 'off',
+    'prettier/prettier': 'error',
     'import/prefer-default-export': 'off',
-    'no-param-reassign': 'off',
     'import/no-extraneous-dependencies': ['error', {devDependencies: true}],
-    'default-param-last': 'off',
+    'react/jsx-filename-extension': [1, {extensions: ['.js', '.jsx']}],
   },
 }
