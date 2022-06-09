@@ -1,15 +1,9 @@
-export const paid = {
-  backgroundColor: 'bg-[rgba(51,215,160,.06)]',
-  textColor: 'text-[#33D69F]',
-  circleColor: 'bg-[#33D69F]',
-}
-export const pendding = {
-  backgroundColor: 'bg-[rgba(255,143,0,.06)]',
-  textColor: 'text-[#FF8F00]',
-  circleColor: 'bg-[#FF8F00]',
-}
-export const draft = {
-  backgroundColor: 'bg-[rgba(55,59,83,.06)]',
-  textColor: 'text-[#373B53]',
-  circleColor: 'bg-[#373B53]',
-}
+export const bgPaid = 'bg-[rgba(51,215,160,.06)]'
+export const bgPending = 'bg-[rgba(255,143,0,.06)]'
+export const bgDraft = 'bg-[rgba(55,59,83,.06)]'
+export const textPaid = 'text-[#33D69F]'
+export const textPending = 'text-[#FF8F00]'
+export const textDraft = 'text-[#373B53]'
+export const circlePaid = 'bg-[#33D69F]'
+export const circlePending = 'bg-[#FF8F00]'
+export const circleDraft = 'bg-[#373B53]'
