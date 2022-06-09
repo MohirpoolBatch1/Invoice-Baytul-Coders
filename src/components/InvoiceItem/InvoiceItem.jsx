@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import {draft, paid, pendding} from './Constans'
 // import { Link } from "react-router-dom";
 
 const InvoiceItem = props => {
@@ -22,25 +23,13 @@ const InvoiceItem = props => {
   useEffect(() => {
     switch (props.status) {
       case 'paid':
-        setStatusColor({
-          backgroundColor: 'bg-[rgba(51,215,160,.06)]',
-          textColor: 'text-[#33D69F]',
-          backgroundColor2: 'bg-[#33D69F]',
-        })
+        setStatusColor(paid)
         break
       case 'pending':
-        setStatusColor({
-          backgroundColor: 'bg-[rgba(255,143,0,.06)]',
-          textColor: 'text-[#FF8F00]',
-          backgroundColor2: 'bg-[#FF8F00]',
-        })
+        setStatusColor(pendding)
         break
       default:
-        setStatusColor({
-          backgroundColor: 'bg-[rgba(55,59,83,.06)]',
-          textColor: 'text-[#373B53]',
-          backgroundColor2: 'bg-[#373B53]',
-        })
+        setStatusColor(draft)
         break
     }
   }, [props.status])
