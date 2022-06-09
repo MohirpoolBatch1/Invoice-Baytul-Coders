@@ -1,12 +1,22 @@
 import React, {useEffect, useState} from 'react'
-import {draft, paid, pendding} from './Constans'
+import {
+  bgPaid,
+  bgPending,
+  bgDraft,
+  circleDraft,
+  circlePaid,
+  circlePending,
+  textDraft,
+  textPaid,
+  textPending,
+} from './Constans'
 // import { Link } from "react-router-dom";
 
 const InvoiceItem = props => {
   const [statusColor, setStatusColor] = useState(() => ({
-    backgroundColor: 'bg-[rgba(255,143,0,.06)]',
-    textColor: 'text-[#FF8F00]',
-    backgroundColor2: 'bg-[#FF8F00]',
+    backgroundColor: bgDraft,
+    textColor: textDraft,
+    circleColor: circleDraft,
   }))
   const totalAmount = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -23,13 +33,25 @@ const InvoiceItem = props => {
   useEffect(() => {
     switch (props.status) {
       case 'paid':
-        setStatusColor(paid)
+        setStatusColor({
+          backgroundColor: bgPaid,
+          textColor: textPaid,
+          circleColor: circlePaid,
+        })
         break
       case 'pending':
-        setStatusColor(pendding)
+        setStatusColor({
+          backgroundColor: bgPending,
+          textColor: textPending,
+          circleColor: circlePending,
+        })
         break
       default:
-        setStatusColor(draft)
+        setStatusColor({
+          backgroundColor: bgDraft,
+          textColor: textDraft,
+          circleColor: circleDraft,
+        })
         break
     }
   }, [props.status])
