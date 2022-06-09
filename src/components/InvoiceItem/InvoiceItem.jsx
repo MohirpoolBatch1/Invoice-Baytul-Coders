@@ -49,9 +49,7 @@ const InvoiceItem = props => {
       <div
         className={`px-6 py-3 text-center rounded-md flex items-center justify-center gap-1 ${statusColor.backgroundColor} ${statusColor.textColor} `}
       >
-        <span
-          className={`w-2 h-2 rounded-full ${statusColor.backgroundColor2}`}
-        >
+        <span className={`w-2 h-2 rounded-full ${statusColor.circleColor}`}>
           &nbsp;
         </span>
         <p className="text-xs leading-[0] font-bold capitalize">
