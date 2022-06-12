@@ -39,12 +39,12 @@ function ViewInvoice() {
     <div className="mx-auto max-w-[45.625rem] w-full">
       <NavLink
         to={'/'}
-        className="flex justify-between items-center max-w-[5.063rem] w-full mb-4"
+        className="flex justify-between items-center max-w-[5.063rem] w-full mb-8"
       >
         <img src={GoBackImage} alt="Go back" />
         <p className={`${Spartan700Woff}`}>Go back</p>
       </NavLink>
-      <div className="py-3 px-5 bg-white shadow-[0_10px_10px_-10px_rgba(72,84,159,0.100397)] rounded-lg mb-6">
+      <div className="py-6 px-5 bg-white shadow-[0_10px_10px_-10px_rgba(72,84,159,0.100397)] rounded-lg mb-6">
         <div className="w-full flex items-center justify-between">
           <div className="flex justify-between w-[9.938rem]">
             <div className="flex items-center justify-between w-[9.938rem]">
@@ -76,7 +76,7 @@ function ViewInvoice() {
           </div>
         </div>
       </div>
-      <div className="bg-white shadow-[0_10px_10px_-10px_rgba(72,84,159,0.100397)] rounded-lg py-6">
+      <div className="bg-white shadow-[0_10px_10px_-10px_rgba(72,84,159,0.100397)] rounded-lg py-12">
         <div className="mx-auto max-w-[39.625rem] w-full">
           <div className="flex items-start justify-between mb-[1.313rem]">
             <div>
@@ -101,7 +101,7 @@ function ViewInvoice() {
               </span>
             </div>
           </div>
-          <ul className="flex justify-between mb-[2rem]">
+          <ul className="flex justify-between mb-[2.813rem]">
             <li className="flex flex-col justify-between">
               <div>
                 <h6 className="text-body-1 text-gray-400 font-medium">
