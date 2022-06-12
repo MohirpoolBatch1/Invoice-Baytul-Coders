@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import {Link} from 'react-router-dom'
 import {
   bgPaid,
   bgPending,
@@ -10,7 +11,6 @@ import {
   textPaid,
   textPending,
 } from './Constans'
-// import { Link } from "react-router-dom";
 
 const InvoiceItem = props => {
   const [statusColor, setStatusColor] = useState(() => ({
@@ -57,9 +57,9 @@ const InvoiceItem = props => {
   }, [props.status])
 
   return (
-    // <Link
-    <div
-      // to={`/invoice-details/${props.id}`}
+    <Link
+      // <div
+      to={`/invoice-details/${props.id}`}
       className="grid grid-cols-[min-content_repeat(4,1fr)_min-content] gap-x-8 items-center bg-white rounded-lg px-5 py-2 shadow-[0px_10px_10px_-10px_rgba(72,84,159,0.100397)]"
     >
       <p className="text-body-1 font-bold">
@@ -87,8 +87,8 @@ const InvoiceItem = props => {
           fillRule="evenodd"
         />
       </svg>
-    </div>
-    // </Link>
+      {/* {/* </div> */}
+    </Link>
   )
 }
 
