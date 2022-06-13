@@ -33,7 +33,7 @@ const Button = props => {
         <img
           src={add}
           alt="add"
-          className="rounded-full bg-white p-3 ml-[-0.5rem] mr-4"
+          className="ml-[-0.5rem] mr-4 rounded-full bg-white p-3"
         />
       ) : null}
       {props.children}

@@ -1,5 +1,6 @@
 const {fontFamily} = require('tailwindcss/defaultTheme')
 const defaultTheme = require('tailwindcss/defaultTheme')
+const TailwindcssForms = require('@tailwindcss/forms')
 
 const {mono: defaultFontFamily} = defaultTheme.fontFamily
 
@@ -56,5 +57,5 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [TailwindcssForms],
 }

@@ -5,7 +5,7 @@ import Homepage from './pages/Homepage/Homepage.jsx'
 import Button from './components/Button/Button.jsx'
 
 const SignedUser = () => (
-  <div className="App font-spartan font-medium h-screen w-screen flex items-center bg-gray-100">
+  <div className="App font-spartan flex h-screen w-screen items-center bg-gray-100 font-medium">
     <Sidebar />
     <Button buttonKind="danger">New Invoice</Button>
     <Routes>

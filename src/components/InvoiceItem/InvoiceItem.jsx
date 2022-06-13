@@ -60,21 +60,21 @@ const InvoiceItem = props => {
     // <Link
     <div
       // to={`/invoice-details/${props.id}`}
-      className="grid grid-cols-[min-content_repeat(4,1fr)_min-content] gap-x-8 items-center bg-white rounded-lg px-5 py-2 shadow-[0px_10px_10px_-10px_rgba(72,84,159,0.100397)]"
+      className="grid grid-cols-[min-content_repeat(4,1fr)_min-content] items-center gap-x-8 rounded-lg bg-white px-5 py-2 shadow-[0px_10px_10px_-10px_rgba(72,84,159,0.100397)]"
     >
       <p className="text-body-1 font-bold">
         <span className="text-gray-300">#</span>RT3080
       </p>
       <p className="text-body-1 text-gray-300">Due {formatedDate}</p>
       <p className="text-body-1 text-gray-300">{props.name}</p>
-      <h3 className="font-bold justify-self-end">{totalAmount}</h3>
+      <h3 className="justify-self-end font-bold">{totalAmount}</h3>
       <div
-        className={`px-6 py-3 text-center rounded-md flex items-center justify-center gap-1 ${statusColor.backgroundColor} ${statusColor.textColor} `}
+        className={`flex items-center justify-center gap-1 rounded-md px-6 py-3 text-center ${statusColor.backgroundColor} ${statusColor.textColor} `}
       >
-        <span className={`w-2 h-2 rounded-full ${statusColor.circleColor}`}>
+        <span className={`h-2 w-2 rounded-full ${statusColor.circleColor}`}>
           &nbsp;
         </span>
-        <p className="text-xs leading-[0] font-bold capitalize">
+        <p className="text-xs font-bold capitalize leading-[0]">
           {props.status}
         </p>
       </div>
