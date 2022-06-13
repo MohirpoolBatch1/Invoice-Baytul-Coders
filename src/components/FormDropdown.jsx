@@ -28,7 +28,7 @@ const FormDropdown = props => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="border-none bg-white z-10 mt-3 max-h-60 w-full overflow-auto rounded-lg">
+            <Listbox.Options className="z-10 mt-3 max-h-60 w-full overflow-auto rounded-lg border-none bg-white">
               {netDays.map((days, daysIndex, array) => (
                 <Listbox.Option
                   key={daysIndex}
