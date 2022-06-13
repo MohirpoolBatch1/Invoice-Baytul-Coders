@@ -12,14 +12,14 @@ const FormDropdown = props => {
   const [selected, setSelected] = useState(netDays[0])
 
   return (
-    <div className="flex-grow w-full relative sm:mb-0">
+    <div className="sm:mb-0 relative w-full flex-grow">
       <label htmlFor="" className="text-xs text-gray-400">
         {props.labelContent}
       </label>
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative">
-          <Listbox.Button className="relative w-full cursor-default rounded-lg  border border-gray-200 bg-white py-2 px-3 text-left focus:outline-none focus-visible:border-purple text-xs  flex justify-between items-center">
-            <span className="block text-sm truncate">{selected.day}</span>
+          <Listbox.Button className="flex w-full cursor-default items-center justify-between rounded-lg border border-gray-200 bg-white py-2 px-3 text-left text-xs focus:outline-none focus-visible:border-purple">
+            <span className="text-sm block truncate">{selected.day}</span>
             <img src={arrowDown} alt="Options" className="cursor-pointer" />
           </Listbox.Button>
           <Transition
@@ -28,7 +28,7 @@ const FormDropdown = props => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-3 max-h-60 w-full overflow-auto rounded-lg border-none bg-white py-1 shadow-lg text-xs z-10">
+            <Listbox.Options className="z-10 mt-3 max-h-60 w-full overflow-auto rounded-lg border-nonebg-white py-1 text-xs shadow-lg">
               {netDays.map((days, daysIndex, array) => (
                 <Listbox.Option
                   key={daysIndex}
