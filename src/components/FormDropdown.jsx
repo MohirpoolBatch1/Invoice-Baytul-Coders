@@ -18,7 +18,7 @@ const FormDropdown = props => {
       </label>
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative">
-          <Listbox.Button className="flex w-full cursor-default items-center justify-between rounded-lg border border-gray-200 bg-white py-2 px-3 text-left text-xs focus:outline-none focus-visible:border-purple">
+          <Listbox.Button className="relative flex w-full cursor-default items-center justify-between rounded-lg border border-gray-200 bg-white py-2 px-3 text-left  text-xs focus:outline-none focus-visible:border-purple">
             <span className="text-sm block truncate">{selected.day}</span>
             <img src={arrowDown} alt="Options" className="cursor-pointer" />
           </Listbox.Button>
@@ -28,7 +28,7 @@ const FormDropdown = props => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="z-10 mt-3 max-h-60 w-full overflow-auto rounded-lg border-none bg-white">
+            <Listbox.Options className="absolute z-10 mt-3 max-h-60 w-full overflow-auto rounded-lg border-none bg-white py-1 text-xs shadow-lg">
               {netDays.map((days, daysIndex, array) => (
                 <Listbox.Option
                   key={daysIndex}
