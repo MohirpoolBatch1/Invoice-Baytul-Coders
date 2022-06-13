@@ -9,7 +9,7 @@ const FormInput = props => (
       type={props.inputType}
       id={props.inputType}
       name={props.inputType}
-      className="py-2 px-3 text-xs text-gray-600 outline-none transition-colors duration-200 ease-in-out focus:border-purple-ligh"
+      className="focus:border-purple-ligh py-2 px-3 text-xs text-gray-600 outline-none transition-colors duration-200 ease-in-out"
     />
   </div>
 )
