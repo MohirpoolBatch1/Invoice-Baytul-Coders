@@ -7,6 +7,8 @@ const FormInput = props => (
     </label>
     <input
       type={props.inputType}
+      id={props.inputId}
+      name={props.inputName}
       className="w-full rounded-lg border border-gray-200 py-2 px-3 text-xs text-gray-600 outline-none transition-colors duration-200 ease-in-out focus:border-purple-light"
     />
   </div>
