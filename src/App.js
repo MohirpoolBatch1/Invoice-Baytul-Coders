@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {BrowserRouter} from 'react-router-dom'
 import Modal from 'react-modal/lib/components/Modal'
 import SignedUser from './SignedUser.jsx'
 import UnsignedUser from './UnsignedUser.jsx'
@@ -10,7 +11,11 @@ function App() {
   // eslint-disable-next-line no-unused-vars
   const [isSigned, setIsSigned] = useState(true)
 
-  return isSigned ? <SignedUser /> : <UnsignedUser />
+  return (
+    <BrowserRouter>
+      {isSigned ? <SignedUser /> : <UnsignedUser />}
+    </BrowserRouter>
+  )
 }
 
 export default App
