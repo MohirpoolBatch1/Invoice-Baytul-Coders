@@ -10,17 +10,7 @@ const SignedUser = () => (
   <div className="App font-spartan font-medium h-screen w-screen flex items-center bg-gray-100">
     <Sidebar />
     {/* <Button buttonKind="danger">New Invoice</Button> */}
-    <ViewInvoice />
-    {/* {DUMMY.map(el => (
-      <InvoiceItem
-        key={el.id}
-        id={el.id}
-        status={el.status}
-        name={el.clientName}
-        totalAmount={el.total}
-        dueDate={el.paymentDue}
-      />
-    ))} */}
+    <ViewInvoice status="pending" />
     <Routes>
       <Route path="/" element={<Homepage />} />
       {/* <Route path="/invoice/:id" element={<ViewInvoice />} /> */}

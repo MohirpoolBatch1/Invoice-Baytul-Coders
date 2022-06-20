@@ -1,15 +1,21 @@
-import React from 'react'
-import {NavLink, useParams} from 'react-router-dom'
+import React, {useState, useEffect} from 'react'
+import {NavLink} from 'react-router-dom'
 import GoBackImage from '../../assets/icon-arrow-left.svg'
 import Button from '../../components/Button/Button.jsx'
-import Spartan500Woff from '../../fonts/league-spartan-v5-latin-500.woff'
-import Spartan500Woff2 from '../../fonts/league-spartan-v5-latin-500.woff2'
-import Spartan700Woff from '../../fonts/league-spartan-v5-latin-700.woff'
-import Spartan700Woff2 from '../../fonts/league-spartan-v5-latin-700.woff2'
 import Database from '../../data.json'
+import {
+  bgPaid,
+  bgPending,
+  bgDraft,
+  circleDraft,
+  circlePaid,
+  circlePending,
+  textDraft,
+  textPaid,
+  textPending,
+} from '../../components/InvoiceItem/Constans'
 
-function ViewInvoice() {
-  const params = useParams()
+function ViewInvoice(props) {
   const datas = Database.map(data => data)
   const dataFirst = datas[0]
 
@@ -33,8 +39,39 @@ function ViewInvoice() {
   const itemQuantity = dataFirst.items.map(item => item.quantity)
   const itemPrice = dataFirst.items.map(item => item.price)
   const itemTotal = dataFirst.items.map(item => item.total)
-  // eslint-disable-next-line no-console
-  console.log(params)
+
+  const [statusColor, setStatusColor] = useState(() => ({
+    backgroundColor: bgDraft,
+    textColor: textDraft,
+    circleColor: circleDraft,
+  }))
+
+  useEffect(() => {
+    switch (props.status) {
+      case 'paid':
+        setStatusColor({
+          backgroundColor: bgPaid,
+          textColor: textPaid,
+          circleColor: circlePaid,
+        })
+        break
+      case 'pending':
+        setStatusColor({
+          backgroundColor: bgPending,
+          textColor: textPending,
+          circleColor: circlePending,
+        })
+        break
+      default:
+        setStatusColor({
+          backgroundColor: bgDraft,
+          textColor: textDraft,
+          circleColor: circleDraft,
+        })
+        break
+    }
+  }, [props.status])
+
   return (
     <div className="mx-auto max-w-[45.625rem] w-full">
       <NavLink
@@ -42,18 +79,25 @@ function ViewInvoice() {
         className="flex justify-between items-center max-w-[5.063rem] w-full mb-8"
       >
         <img src={GoBackImage} alt="Go back" />
-        <p className={`${Spartan700Woff}`}>Go back</p>
+        <p className="text-body-1 font-bold">Go back</p>
       </NavLink>
       <div className="py-6 px-5 bg-white shadow-[0_10px_10px_-10px_rgba(72,84,159,0.100397)] rounded-lg mb-6">
         <div className="w-full flex items-center justify-between">
           <div className="flex justify-between w-[9.938rem]">
             <div className="flex items-center justify-between w-[9.938rem]">
               <div>
-                <p className={`${Spartan500Woff} ${Spartan500Woff2}`}>Status</p>
+                <p className="">Status</p>
               </div>
-              <div>
-                <p className={`${Spartan700Woff} ${Spartan700Woff2}`}>
-                  Pending
+              <div
+                className={`px-6 py-3 text-center rounded-md flex items-center justify-center gap-1 ${statusColor.backgroundColor} ${statusColor.textColor} `}
+              >
+                <span
+                  className={`w-2 h-2 rounded-full ${statusColor.circleColor}`}
+                >
+                  &nbsp;
+                </span>
+                <p className="text-xs leading-[0] font-bold capitalize">
+                  {props.status}
                 </p>
               </div>
             </div>
@@ -178,9 +222,11 @@ function ViewInvoice() {
                         {itemQuantity}
                       </td>
                       <td className="text-right pb-8 text-xs text-gray-400 font-bold">
+                        <span>£ </span>
                         {itemPrice}
                       </td>
                       <td className="text-right pb-8 text-xs text-gray-600 font-bold">
+                        <span>£ </span>
                         {itemTotal}
                       </td>
                     </tr>
