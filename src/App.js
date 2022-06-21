@@ -11,10 +11,12 @@ function App() {
   // eslint-disable-next-line no-unused-vars
   const [isSigned, setIsSigned] = useState(true)
 
-  return (
+  return isSigned ? (
     <BrowserRouter>
-      {isSigned ? <SignedUser /> : <UnsignedUser />}
+      <SignedUser />
     </BrowserRouter>
+  ) : (
+    <UnsignedUser />
   )
 }
 
