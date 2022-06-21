@@ -1,15 +1,16 @@
 import React, {Fragment, useState} from 'react'
 import {Listbox, Transition} from '@headlessui/react'
+import {uniqueId} from 'lodash'
 import arrowDown from '../../assets/icon-arrow-down.svg'
-import {netDays} from './Constants'
+import {netDays} from './constants'
 
-const FormDropdown = props => {
+const FormDropdown = ({labelContent, ...props}) => {
   const [selected, setSelected] = useState(netDays[0])
 
   return (
     <div className="sm:mb-0 relative w-full flex-grow">
       <label htmlFor="" className="text-xs text-gray-400">
-        {props.labelContent}
+        {labelContent}
       </label>
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative">
@@ -26,7 +27,7 @@ const FormDropdown = props => {
             <Listbox.Options className="absolute z-10 mt-3 max-h-60 w-full overflow-auto rounded-lg border-none bg-white py-1 text-xs shadow-lg">
               {netDays.map((days, daysIndex, array) => (
                 <Listbox.Option
-                  key={daysIndex}
+                  key={uniqueId('DAY_')}
                   className={({active}) =>
                     `relative cursor-default select-none py-2 pl-3 pr-4 
                     ${active ? 'text-purple' : 'text-gray-600'}
