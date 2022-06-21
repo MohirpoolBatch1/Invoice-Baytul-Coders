@@ -10,6 +10,8 @@ const SignedUser = () => (
     <Button buttonKind="danger">New Invoice</Button>
     <Routes>
       <Route path="/" element={<Homepage />} />
+      {/* <Route path="/invoice/:invoiceId" element={<InvoiceDetail />} />
+      <Route path="*" element={<NotFound />} /> */}
     </Routes>
   </div>
 )
