@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from 'react'
 import {Listbox, Transition} from '@headlessui/react'
-import {uniqueId} from 'lodash'
+import uniqueId from 'lodash/uniqueId'
 import arrowDown from '../../assets/icon-arrow-down.svg'
 import {netDays} from './constants'
 
