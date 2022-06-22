@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import {Link} from 'react-router-dom'
 import {
   bgPaid,
   bgPending,
@@ -10,7 +11,6 @@ import {
   textPaid,
   textPending,
 } from './Constans'
-// import { Link } from "react-router-dom";
 
 const InvoiceItem = props => {
   const [statusColor, setStatusColor] = useState(() => ({
@@ -57,14 +57,14 @@ const InvoiceItem = props => {
   }, [props.status])
 
   return (
-    // <Link
-    <div
-      // to={`/invoice-details/${props.id}`}
-      className="grid grid-cols-[min-content_repeat(4,1fr)_min-content] items-center gap-x-8 rounded-lg bg-white px-5 py-2 shadow-[0px_10px_10px_-10px_rgba(72,84,159,0.100397)]"
+    <Link
+      to={`/invoice-details/${props.id}`}
+      className="my-2 grid grid-cols-[min-content_repeat(4,1fr)_min-content] items-center gap-x-8 rounded-lg bg-white px-5 py-2 shadow-[0px_10px_10px_-10px_rgba(72,84,159,0.100397)]"
     >
-      <p className="text-body-1 font-bold">
-        <span className="text-gray-300">#</span>RT3080
-      </p>
+      <div className="text-body-1 font-bold">
+        <span className="text-gray-300">#</span>
+        {props.id}
+      </div>
       <p className="text-body-1 text-gray-300">Due {formatedDate}</p>
       <p className="text-body-1 text-gray-300">{props.name}</p>
       <h3 className="justify-self-end font-bold">{totalAmount}</h3>
@@ -87,8 +87,7 @@ const InvoiceItem = props => {
           fillRule="evenodd"
         />
       </svg>
-    </div>
-    // </Link>
+    </Link>
   )
 }
 
