@@ -22,7 +22,6 @@ const InvoiceItems = props => (
 
 const Homepage = () => {
   const [invoiceItems, setInvoiceItems] = useState(items)
-
   return (
     <div className="mx-auto min-w-[45.6rem] px-6">
       <InvoiceNavbar amountInvoices={invoiceItems.length} />
