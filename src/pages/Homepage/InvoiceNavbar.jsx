@@ -4,6 +4,7 @@ import Button from '../../components/Button/Button.jsx'
 
 const InvoiceNavbar = ({amountInvoices}) => {
   const [showFilter, setShowFilter] = useState(true)
+
   return (
     <div className="flex items-center justify-between py-16">
       <div>
@@ -28,7 +29,7 @@ const InvoiceNavbar = ({amountInvoices}) => {
             />
           </span>
         </button>
-        <Button buttonKind="primary-add">
+        <Button buttonKind="primary-add" className={'px-4 py-2'}>
           New <span className="ml-2 hidden tablet:inline"> Invoice</span>
         </Button>
         <div

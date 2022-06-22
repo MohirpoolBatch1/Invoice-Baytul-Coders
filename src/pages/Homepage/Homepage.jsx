@@ -1,15 +1,33 @@
 import React, {useState} from 'react'
+import {uniqueId} from 'lodash'
 import EmptyPage from './EmptyPage.jsx'
 import InvoiceNavbar from './InvoiceNavbar.jsx'
+import items from '../../data.json'
+import InvoiceItem from '../../components/InvoiceItem/InvoiceItem.jsx'
+
+const InvoiceItems = props => (
+  <div>
+    {props.invoiceItems.map(item => (
+      <InvoiceItem
+        key={uniqueId('ITEM_')}
+        id={item.id}
+        totalAmount={item.total}
+        dueDate={item.paymentDue}
+        name={item.clientName}
+        status={item.status}
+      />
+    ))}
+  </div>
+)
 
 const Homepage = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [invoices, setInvoices] = useState([1, 3, 2, 1])
+  const [invoiceItems, setInvoiceItems] = useState(items)
+
   return (
-    <div className="mx-auto max-w-3xl px-6">
-      <InvoiceNavbar amountInvoices={invoices.length} />
-      {invoices?.length > 0 ? (
-        <div className="text-center">Invoices list</div>
+    <div className="mx-auto min-w-[45.6rem] px-6">
+      <InvoiceNavbar amountInvoices={invoiceItems.length} />
+      {items.length !== 0 ? (
+        <InvoiceItems invoiceItems={invoiceItems} />
       ) : (
         <EmptyPage />
       )}
