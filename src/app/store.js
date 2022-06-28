@@ -1,4 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit'
+import {apiSlice} from './apiSlice'
 
 // TODO: Default reducer yozilgan, bunga hozircha tegmay turing.
 const initialState = {value: 0}
@@ -18,6 +19,9 @@ function counterReducer(state = initialState, action = {}) {
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    counter: counterReducer.reducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
   },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
 })
