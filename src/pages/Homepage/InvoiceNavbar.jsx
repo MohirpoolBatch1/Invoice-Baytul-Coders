@@ -15,9 +15,6 @@ const InvoiceNavbar = ({amountInvoices, statuses, changeHandler}) => {
       }
     }
     document.addEventListener('click', handleEvent, true)
-    return () => {
-      document.removeEventListener('click', handleEvent, true)
-    }
   }, [])
 
   return (
