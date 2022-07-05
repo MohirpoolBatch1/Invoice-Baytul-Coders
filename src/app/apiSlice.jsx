@@ -1,6 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-
-const baseUrl = 'https://serene-plains-38345.herokuapp.com'
+import {baseUrl} from './constants.jsx'
 
 export const apiSlice = createApi({
   reducerPath: 'items',
