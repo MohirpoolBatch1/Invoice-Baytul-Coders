@@ -19,7 +19,7 @@ function counterReducer(state = initialState, action = {}) {
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer.reducer,
+    counter: counterReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: getDefaultMiddleware =>

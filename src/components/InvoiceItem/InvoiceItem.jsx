@@ -58,7 +58,7 @@ const InvoiceItem = props => {
 
   return (
     <Link
-      to={`/invoice-details/${props.id}`}
+      to={`/invoice/${props.id}`}
       className="my-2 grid grid-cols-[min-content_repeat(4,1fr)_min-content] items-center gap-x-8 rounded-lg bg-white px-5 py-2 shadow-[0px_10px_10px_-10px_rgba(72,84,159,0.100397)]"
     >
       <div className="text-body-1 font-bold">

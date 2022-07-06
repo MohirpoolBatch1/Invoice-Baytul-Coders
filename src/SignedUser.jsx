@@ -2,14 +2,15 @@ import React from 'react'
 import {Routes, Route} from 'react-router-dom'
 import Sidebar from './components/Sidebar.jsx'
 import Homepage from './pages/Homepage/Homepage.jsx'
+// import ViewInvoice from './pages/Homepage/ViewInvoice.jsx'
 
 const SignedUser = () => (
   <div className="App font-spartan flex h-screen w-screen bg-gray-100 font-medium">
     <Sidebar />
     <Routes>
       <Route path="/" element={<Homepage />} />
-      {/* <Route path="/invoice/:invoiceId" element={<InvoiceDetail />} />
-      <Route path="*" element={<NotFound />} /> */}
+      {/* <Route path="/invoice/:invoiceId" element={<ViewInvoice />} /> */}
+      {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
   </div>
 )
