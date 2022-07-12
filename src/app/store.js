@@ -1,4 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit'
+import {invoiceApi} from '../services/invoiceApi'
 
 // TODO: Default reducer yozilgan, bunga hozircha tegmay turing.
 const initialState = {value: 0}
@@ -19,5 +20,8 @@ function counterReducer(state = initialState, action = {}) {
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    [invoiceApi.reducerPath]: invoiceApi.reducer,
   },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(invoiceApi.middleware),
 })
