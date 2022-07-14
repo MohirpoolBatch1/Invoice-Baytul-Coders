@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-modal'
 import {useNavigate} from 'react-router-dom'
-import {useDeleteInvoiceMutation} from '../../services/invoiceApi'
+import {useDeleteInvoiceMutation} from '../../app/invoiceApi'
 import Button from '../Button/Button.jsx'
 import {customStyles} from './constant'
 

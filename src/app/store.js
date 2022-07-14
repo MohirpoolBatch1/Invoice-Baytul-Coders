@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit'
-import {invoiceApi} from '../services/invoiceApi'
+import {invoiceApi} from './invoiceApi'
 
 // TODO: Default reducer yozilgan, bunga hozircha tegmay turing.
 const initialState = {value: 0}

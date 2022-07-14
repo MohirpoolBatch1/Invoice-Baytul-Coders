@@ -37,8 +37,3 @@
     @apply text-base;
   }
 }
-
-th,
-td {
-  @apply py-3;
-}
