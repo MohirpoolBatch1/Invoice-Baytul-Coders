@@ -21,7 +21,7 @@ const InvoiceItems = props => (
 )
 
 const Homepage = () => {
-  const {data, isSuccess} = useGetItemsQuery()
+  const {data = [], isSuccess} = useGetItemsQuery()
 
   const [items, setItems] = useState([])
   const [amountInvoices, setAmountInvoices] = useState(
@@ -40,9 +40,8 @@ const Homepage = () => {
       [e.target.name]: e.target.checked,
     })
   }
-
   useEffect(() => {
-    isSuccess ? setItems(data) : setItems([])
+    isSuccess && setItems(data)
   }, [data, isSuccess])
 
   useEffect(() => {
