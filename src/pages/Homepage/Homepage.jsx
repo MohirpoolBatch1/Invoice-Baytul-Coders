@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react'
 import {uniqueId} from 'lodash'
 import EmptyPage from './EmptyPage.jsx'
 import InvoiceNavbar from './InvoiceNavbar.jsx'
-import items from '../../data.json'
 import InvoiceItem from '../../components/InvoiceItem/InvoiceItem.jsx'
+import {useGetItemsQuery} from '../../app/apiSlice.jsx'
 
 const InvoiceItems = props => (
   <div>
@@ -21,6 +21,9 @@ const InvoiceItems = props => (
 )
 
 const Homepage = () => {
+  const {data = [], isSuccess} = useGetItemsQuery()
+
+  const [items, setItems] = useState([])
   const [amountInvoices, setAmountInvoices] = useState(
     items.length ? `There are ${items.length} total invoices` : 'No invoices',
   )
@@ -37,21 +40,27 @@ const Homepage = () => {
       [e.target.name]: e.target.checked,
     })
   }
+  useEffect(() => {
+    isSuccess && setItems(data)
+  }, [data, isSuccess])
 
   useEffect(() => {
     const filteredInvoices = items.filter(item => statuses[item.status])
-    setInvoiceItems(filteredInvoices.length > 0 ? filteredInvoices : items)
+
+    const filterStatuses = Object.values(statuses).filter(status => status)
+
+    setInvoiceItems(filterStatuses.length > 0 ? filteredInvoices : items)
 
     const amount = items.length
       ? `There are ${items.length} total invoices`
       : 'No invoices'
 
     setAmountInvoices(
-      filteredInvoices.length > 0
+      filterStatuses.length > 0
         ? `There are ${filteredInvoices.length} pending invoices`
         : amount,
     )
-  }, [statuses, amountInvoices])
+  }, [statuses, amountInvoices, items])
 
   return (
     <div className="mx-auto w-full max-w-[45.6rem] px-6">
