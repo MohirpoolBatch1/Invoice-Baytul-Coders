@@ -5,7 +5,7 @@ export default function DefineStatus({status}) {
 
   return (
     <div
-      className={`bg-[${color}]/5 w-[6.5rem] rounded-md py-3 text-center text-xs font-bold capitalize
+      className={`bg-[${color}] w-[6.5rem] rounded-md bg-opacity-5 py-3 text-center text-xs font-bold capitalize
        text-[${color}]`}
     >
       <span
