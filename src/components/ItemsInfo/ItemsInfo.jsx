@@ -1,5 +1,5 @@
 import React from 'react'
-import {totalAmount} from '../../formatters'
+import {prettyCurrency} from '../../pages/InvoiceDetail/utils'
 
 function ItemsInfo({name, quantity, price, total}) {
   return (
@@ -11,10 +11,10 @@ function ItemsInfo({name, quantity, price, total}) {
         {quantity}
       </p>
       <p className="w-full max-w-[7.375rem] text-right text-body-1 font-bold text-gray-400">
-        {totalAmount(price)}
+        {prettyCurrency(price)}
       </p>
       <p className="w-full max-w-[8.563rem] text-right text-body-1 font-bold text-gray-600">
-        {totalAmount(total)}
+        {prettyCurrency(total)}
       </p>
     </li>
   )

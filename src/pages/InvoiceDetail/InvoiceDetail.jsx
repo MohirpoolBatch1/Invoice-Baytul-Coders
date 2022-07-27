@@ -1,71 +1,29 @@
-import React, {useState, useEffect} from 'react'
-import {NavLink} from 'react-router-dom'
-import uniqueId from 'lodash/uniqueId'
-import GoBackImage from '../../assets/icon-arrow-left.svg'
+import React, {useState} from 'react'
+import {uniqueId} from 'lodash'
+import {Link} from 'react-router-dom'
+import iconArrowLeft from '../../assets/icon-arrow-left.svg'
 import Button from '../../components/Button/Button.jsx'
+import DefineStatus from '../../components/Status/DefineStatus.jsx'
+import DeletionModal from '../../components/Modal/index.jsx'
+import {prettyCurrency, prettyLocaleDate} from './utils'
 import ItemsInfo from '../../components/ItemsInfo/ItemsInfo.jsx'
-import invoice from '../../items'
-import {
-  bgPaid,
-  bgPending,
-  bgDraft,
-  circleDraft,
-  circlePaid,
-  circlePending,
-  textDraft,
-  textPaid,
-  textPending,
-} from '../../components/InvoiceItem/Constans'
-import {formatedDate} from '../../formatters'
+import {invoice} from './mock'
 
-function ViewInvoice({status}) {
-  const [statusColor, setStatusColor] = useState(() => ({
-    backgroundColor: bgDraft,
-    textColor: textDraft,
-    circleColor: circleDraft,
-  }))
-
-  const createdAt = new Date(invoice.createdAt)
-  const paymentDue = new Date(invoice.paymentDue)
-
-  useEffect(() => {
-    switch (status) {
-      case 'paid':
-        setStatusColor({
-          backgroundColor: bgPaid,
-          textColor: textPaid,
-          circleColor: circlePaid,
-        })
-        break
-      case 'pending':
-        setStatusColor({
-          backgroundColor: bgPending,
-          textColor: textPending,
-          circleColor: circlePending,
-        })
-        break
-      default:
-        setStatusColor({
-          backgroundColor: bgDraft,
-          textColor: textDraft,
-          circleColor: circleDraft,
-        })
-        break
-    }
-  }, [status])
+function InvoiceDetail() {
+  const [openModal, setOpenModal] = useState(false)
 
   return (
-    <div className="mx-auto flex w-full max-w-[45.625rem] items-center justify-center">
+    <div className="mx-auto flex w-full max-w-[45.625rem] items-center justify-center pt-16">
       <div className="w-full pt-16 pb-14">
-        <NavLink
+        <Link
           to={'/'}
           className="mb-8 flex w-full max-w-[5.063rem] items-center justify-between"
         >
-          <img src={GoBackImage} alt="Go back" />
+          <img src={iconArrowLeft} alt="Go back" />
           <p className="font-spartan text-body-1 font-bold tracking-[-0.0156rem]">
             Go back
           </p>
-        </NavLink>
+        </Link>
         <div className="mb-6 overflow-y-auto rounded-lg bg-white py-3 px-5 shadow-[0_10px_10px_-10px_rgba(72,84,159,0.100397)]">
           <div className="flex w-full items-center justify-between">
             <div className="flex w-[9.938rem] justify-between">
@@ -75,18 +33,7 @@ function ViewInvoice({status}) {
                     Status
                   </p>
                 </div>
-                <div
-                  className={`flex items-center justify-center gap-1 rounded-md px-6 py-3 text-center ${statusColor.backgroundColor} ${statusColor.textColor} `}
-                >
-                  <span
-                    className={`h-2 w-2 rounded-full ${statusColor.circleColor}`}
-                  >
-                    &nbsp;
-                  </span>
-                  <p className="text-xs font-bold capitalize leading-[0]">
-                    {status}
-                  </p>
-                </div>
+                <DefineStatus status={invoice.status} />
               </div>
             </div>
             <div>
@@ -125,14 +72,12 @@ function ViewInvoice({status}) {
                   Graphic Design
                 </p>
               </div>
-              <div className="flex flex-col items-end">
-                <p className="text-body-2 font-medium text-gray-400">
-                  {invoice.senderAddress.street} <br />
-                  {invoice.senderAddress.city} <br />
-                  {invoice.senderAddress.postCode} <br />
-                  {invoice.senderAddress.country} <br />
-                </p>
-              </div>
+              <p className="text-right text-body-2 font-medium text-gray-400">
+                {invoice.senderAddress.street} <br />
+                {invoice.senderAddress.city} <br />
+                {invoice.senderAddress.postCode} <br />
+                {invoice.senderAddress.country} <br />
+              </p>
             </div>
             <div className="mb-[2.813rem] flex justify-between">
               <div className="flex flex-col justify-between">
@@ -141,7 +86,7 @@ function ViewInvoice({status}) {
                     Invoice Date
                   </h6>
                   <p className="text-base font-bold text-gray-600">
-                    {formatedDate(createdAt)}
+                    {prettyLocaleDate(invoice.createdAt)}
                   </p>
                 </div>
                 <div className="">
@@ -149,7 +94,7 @@ function ViewInvoice({status}) {
                     Payment Due
                   </h6>
                   <p className="text-base font-bold text-gray-600">
-                    {formatedDate(paymentDue)}
+                    {prettyLocaleDate(invoice.paymentDue)}
                   </p>
                 </div>
               </div>
@@ -213,7 +158,7 @@ function ViewInvoice({status}) {
                   </div>
                   <div>
                     <p className="text-lg font-bold text-white">
-                      £ {invoice.total}
+                      {prettyCurrency(invoice.total)}
                     </p>
                   </div>
                 </div>
@@ -226,4 +171,4 @@ function ViewInvoice({status}) {
   )
 }
 
-export default ViewInvoice
+export default InvoiceDetail
