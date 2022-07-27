@@ -47,6 +47,7 @@ function InvoiceDetail() {
                 <Button
                   buttonKind="danger"
                   className="py-4 px-7 hover:bg-red-light hover:text-white"
+                  onClick={() => setOpenModal(true)}
                 >
                   Delete
                 </Button>
@@ -167,6 +168,11 @@ function InvoiceDetail() {
           </div>
         </div>
       </div>
+      <DeletionModal
+        isOpen={openModal}
+        closeModal={() => setOpenModal(false)}
+        invoiceId={invoice.id}
+      />
     </div>
   )
 }
