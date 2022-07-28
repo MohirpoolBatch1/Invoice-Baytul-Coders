@@ -13,8 +13,7 @@ const Button = props => {
     className += 'text-gray-100  bg-red hover:bg-red-light'
 
   if (props.buttonKind === edit)
-    className +=
-      'text-gray-400 bg-gray-50  bg-gray-200 hover:bg-gray-700 hover:text-gray-200'
+    className += 'text-gray-400 bg-gray-100 hover:bg-gray-200'
 
   if (props.buttonKind === cancel)
     className += 'text-gray-400 bg-gray-50 bg-gray-700  hover:text-gray-200'
