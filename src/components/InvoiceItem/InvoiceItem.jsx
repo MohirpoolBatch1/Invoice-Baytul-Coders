@@ -1,60 +1,12 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom'
-import {
-  bgPaid,
-  bgPending,
-  bgDraft,
-  circleDraft,
-  circlePaid,
-  circlePending,
-  textDraft,
-  textPaid,
-  textPending,
-} from './Constans'
+import DefineStatus from '../Status/DefineStatus.jsx'
+import {prettyCurrency, prettyLocaleDate} from '../../pages/InvoiceDetail/utils'
 
 const InvoiceItem = props => {
-  const [statusColor, setStatusColor] = useState(() => ({
-    backgroundColor: bgDraft,
-    textColor: textDraft,
-    circleColor: circleDraft,
-  }))
-  const totalAmount = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'GBP',
-  }).format(props.totalAmount)
+  const totalAmount = prettyCurrency(props.totalAmount)
 
-  const rawDate = new Date(props.dueDate)
-  const formatedDate = new Intl.DateTimeFormat('en-US', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  }).format(rawDate)
-
-  useEffect(() => {
-    switch (props.status) {
-      case 'paid':
-        setStatusColor({
-          backgroundColor: bgPaid,
-          textColor: textPaid,
-          circleColor: circlePaid,
-        })
-        break
-      case 'pending':
-        setStatusColor({
-          backgroundColor: bgPending,
-          textColor: textPending,
-          circleColor: circlePending,
-        })
-        break
-      default:
-        setStatusColor({
-          backgroundColor: bgDraft,
-          textColor: textDraft,
-          circleColor: circleDraft,
-        })
-        break
-    }
-  }, [props.status])
+  const formatedDate = prettyLocaleDate(props.dueDate)
 
   return (
     <Link
@@ -68,16 +20,7 @@ const InvoiceItem = props => {
       <p className="text-body-1 text-gray-300">Due {formatedDate}</p>
       <p className="text-body-1 text-gray-300">{props.name}</p>
       <h3 className="justify-self-end font-bold">{totalAmount}</h3>
-      <div
-        className={`flex items-center justify-center gap-1 rounded-md px-6 py-3 text-center ${statusColor.backgroundColor} ${statusColor.textColor} `}
-      >
-        <span className={`h-2 w-2 rounded-full ${statusColor.circleColor}`}>
-          &nbsp;
-        </span>
-        <p className="text-xs font-bold capitalize leading-[0]">
-          {props.status}
-        </p>
-      </div>
+      <DefineStatus status={props.status} />
       <svg width="7" height="10" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M1 1l4 4-4 4"
