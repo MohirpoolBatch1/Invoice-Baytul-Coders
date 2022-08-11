@@ -1,68 +1,80 @@
-import React, {useState} from 'react'
-import uniqueId from 'lodash/uniqueId'
+import React, {useState, useCallback} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import Button from '../Button/Button.jsx'
 import FormInput from '../FormInput/FormInput.jsx'
 import DataPicker from '../FormInput/FormDatePicker.jsx'
 import Dropdown from '../FormInput/FormDropdown.jsx'
-import {useForm} from './useForm'
+import FormItemRow from '../FormItemRow/index.jsx'
 import {useAddInvoiceMutation} from '../../app/invoiceApi'
 import {netDays} from '../FormInput/constants'
-import FormItemRow from '../FormItemRow/index.jsx'
+import {addNewItem, clearItemInputs} from '../../app/itemSlice'
+import {
+  getGeneralData,
+  getSenderAddress,
+  getClientAddress,
+  clearInputs,
+} from '../../app/formSlice'
 
 function FormWindow({isOpenForm, closeForm}) {
   const [paymentDue, setPaymentDue] = useState(new Date())
   const [terms, setTerms] = useState(netDays[0])
 
-  const [generalData, handleGeneralData] = useForm({
-    description: '',
-    clientName: '',
-    clientEmail: '',
-    status: 'pending',
-  })
-  const [senderAddress, handleSenderAddress] = useForm({
-    street: '',
-    city: '',
-    postCode: '',
-    country: '',
-  })
-  const [clientAddress, handleClientAddress] = useForm({
-    street: '',
-    city: '',
-    postCode: '',
-    country: '',
-  })
-
-  const [itemList, setItemList] = useState([])
-
-  const handleAddClick = () => {
-    setItemList([
-      ...itemList,
-      {
-        name: '',
-        quantity: '',
-        price: '',
-        total: '',
-      },
-    ])
+  const dispatch = useDispatch()
+  const {itemList} = useSelector(state => state.itemList)
+  const {generalData, senderAddress, clientAddress} = useSelector(
+    state => state.formData,
+  )
+  const handleGeneralData = e => {
+    const {name, value} = e.target
+    dispatch(getGeneralData({name, value}))
+  }
+  const handleSenderAddress = e => {
+    const {name, value} = e.target
+    dispatch(getSenderAddress({name, value}))
+  }
+  const handleClientAddress = e => {
+    const {name, value} = e.target
+    dispatch(getClientAddress({name, value}))
   }
 
   const [addInvoice] = useAddInvoiceMutation()
 
-  const handleAddInvoice = async () => {
+  const handleAddInvoice = useCallback(async () => {
     await addInvoice({
-      paymentDue,
       ...generalData,
       paymentTerms: terms.day,
+      items: itemList,
+      paymentDue,
       senderAddress,
       clientAddress,
-      items: itemList,
     })
     closeForm()
+    dispatch(clearInputs())
+    dispatch(clearItemInputs())
+  }, [
+    addInvoice,
+    dispatch,
+    closeForm,
+    clientAddress,
+    generalData,
+    itemList,
+    paymentDue,
+    senderAddress,
+    terms,
+  ])
+
+  const clickedDiscard = () => {
+    closeForm()
+    dispatch(clearInputs())
+    dispatch(clearItemInputs())
   }
+
   return (
-    <div className={`${!isOpenForm && 'hidden'} fixed inset-0 bg-gray-700/40`}>
-      <div className="flex h-screen max-w-[44rem] flex-col justify-between rounded-[1.25rem] bg-white p-[3.5rem] pl-40 ">
-        <div className="overflow-y-auto p-2 pr-4">
+    <div
+      className={`${isOpenForm ? null : 'hidden'} fixed inset-0 bg-gray-700/40`}
+    >
+      <div className=" flex h-screen max-w-[44rem] flex-col justify-between rounded-[1.25rem] bg-white p-[3.5rem] pl-40 ">
+        <div className="overflow-y-auto  p-2 pr-4">
           <h1 className="mb-8 font-bold text-gray-600">New invoice</h1>
           <p className="mb-4 text-purple">Bill From</p>
           <FormInput
@@ -180,29 +192,23 @@ function FormWindow({isOpenForm, closeForm}) {
             <div className="basis-1/4 ">Total</div>
           </div>
           <div>
-            {itemList.map((item, index) => (
-              <FormItemRow
-                key={uniqueId()}
-                index={index}
-                item={item}
-                itemList={itemList}
-                setItemList={setItemList}
-              />
+            {itemList.map(item => (
+              <FormItemRow key={item.id} item={item} />
             ))}
           </div>
           <Button
-            onClick={handleAddClick}
+            onClick={() => dispatch(addNewItem())}
             className="mt-4 w-full"
             buttonKind="edit"
           >
             + Add New Item
           </Button>
         </div>
-        <div className="flex items-center justify-between pt-6">
-          <Button onClick={closeForm} buttonKind="edit">
+        <div className="flex items-center justify-between pt-6 ">
+          <Button onClick={clickedDiscard} buttonKind="edit">
             Discard
           </Button>
-          <div className="flex space-x-2">
+          <div className="flex space-x-2 ">
             <Button buttonKind="cancel">Save as Draft</Button>
             <Button onClick={handleAddInvoice} buttonKind="primary">
               Save & Send

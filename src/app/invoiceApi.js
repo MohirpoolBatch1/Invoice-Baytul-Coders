@@ -11,6 +11,10 @@ export const invoiceApi = createApi({
       query: id => `/invoice/${id}`,
       providesTags: ['Invoice'],
     }),
+    getAllInvoices: builder.query({
+      query: () => '/invoice',
+      providesTags: ['Invoice'],
+    }),
     deleteInvoice: builder.mutation({
       query: id => ({
         url: `/invoice/${id}`,
@@ -30,6 +34,7 @@ export const invoiceApi = createApi({
 })
 
 export const {
+  useGetAllInvoicesQuery,
   useDeleteInvoiceMutation,
   useGetInvoiceItemQuery,
   useAddInvoiceMutation,
