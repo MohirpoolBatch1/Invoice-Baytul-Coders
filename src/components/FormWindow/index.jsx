@@ -5,9 +5,12 @@ import FormInput from '../FormInput/FormInput.jsx'
 import DataPicker from '../FormInput/FormDatePicker.jsx'
 import Dropdown from '../FormInput/FormDropdown.jsx'
 import FormItemRow from '../FormItemRow/index.jsx'
-import {useAddInvoiceMutation} from '../../app/invoiceApi'
 import {netDays} from '../FormInput/constants'
 import {addNewItem, clearItemInputs} from '../../app/itemSlice'
+import {
+  useAddInvoiceMutation,
+  useSaveAsDraftMutation,
+} from '../../app/invoiceApi'
 import {
   getGeneralData,
   getSenderAddress,
@@ -38,30 +41,47 @@ function FormWindow({isOpenForm, closeForm}) {
   }
 
   const [addInvoice] = useAddInvoiceMutation()
+  const [saveAsDraft] = useSaveAsDraftMutation()
 
-  const handleAddInvoice = useCallback(async () => {
-    await addInvoice({
-      ...generalData,
-      paymentTerms: terms.day,
-      items: itemList,
+  const handleAddInvoice = useCallback(
+    async status => {
+      if (status === 'draft') {
+        const newGeneralData = {...generalData, status}
+        await saveAsDraft({
+          ...newGeneralData,
+          paymentTerms: terms.day,
+          items: itemList,
+          paymentDue,
+          senderAddress,
+          clientAddress,
+        })
+      } else {
+        await addInvoice({
+          ...generalData,
+          paymentTerms: terms.day,
+          items: itemList,
+          paymentDue,
+          senderAddress,
+          clientAddress,
+        })
+      }
+      closeForm()
+      dispatch(clearInputs())
+      dispatch(clearItemInputs())
+    },
+    [
+      addInvoice,
+      saveAsDraft,
+      dispatch,
+      closeForm,
+      clientAddress,
+      generalData,
+      itemList,
       paymentDue,
       senderAddress,
-      clientAddress,
-    })
-    closeForm()
-    dispatch(clearInputs())
-    dispatch(clearItemInputs())
-  }, [
-    addInvoice,
-    dispatch,
-    closeForm,
-    clientAddress,
-    generalData,
-    itemList,
-    paymentDue,
-    senderAddress,
-    terms,
-  ])
+      terms,
+    ],
+  )
 
   const clickedDiscard = () => {
     closeForm()
@@ -209,7 +229,12 @@ function FormWindow({isOpenForm, closeForm}) {
             Discard
           </Button>
           <div className="flex space-x-2 ">
-            <Button buttonKind="cancel">Save as Draft</Button>
+            <Button
+              onClick={() => handleAddInvoice('draft')}
+              buttonKind="cancel"
+            >
+              Save as Draft
+            </Button>
             <Button onClick={handleAddInvoice} buttonKind="primary">
               Save & Send
             </Button>

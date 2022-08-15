@@ -27,25 +27,19 @@ export const formSlice = createSlice({
   reducers: {
     getGeneralData: (state, action) => {
       const {name, value} = action.payload
-      // eslint-disable-next-line no-param-reassign
       state.generalData[name] = value
     },
     getSenderAddress: (state, action) => {
       const {name, value} = action.payload
-      // eslint-disable-next-line no-param-reassign
       state.senderAddress[name] = value
     },
     getClientAddress: (state, action) => {
       const {name, value} = action.payload
-      // eslint-disable-next-line no-param-reassign
       state.clientAddress[name] = value
     },
     clearInputs: state => {
-      // eslint-disable-next-line no-param-reassign
       state.clientAddress = initialState.clientAddress
-      // eslint-disable-next-line no-param-reassign
       state.senderAddress = initialState.senderAddress
-      // eslint-disable-next-line no-param-reassign
       state.generalData = initialState.generalData
     },
   },

@@ -28,15 +28,12 @@ export const itemSlice = createSlice({
       const {name, value, id} = action.payload
       state.itemList.forEach(item => {
         if (item.id === id) {
-          // eslint-disable-next-line no-param-reassign
           item[name] = convertToNumber(name, value)
-          // eslint-disable-next-line no-param-reassign
-          item.total = +getTotalAmount(item.price, item.quantity)
+          item.total = getTotalAmount(item.price, item.quantity)
         }
       })
     },
     clearItemInputs: state => {
-      // eslint-disable-next-line no-param-reassign
       state.itemList = []
     },
   },

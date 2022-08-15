@@ -1,13 +1,5 @@
 export function getTotalAmount(price, quantity) {
-  return (
-    (price && quantity
-      ? parseFloat(price) * parseFloat(quantity)
-      : null
-    )?.toLocaleString(undefined, {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }) || '0.00'
-  )
+  return price && quantity ? +price * +quantity : 0
 }
 
 export const convertToNumber = (name, value) => {

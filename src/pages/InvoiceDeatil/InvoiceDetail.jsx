@@ -1,56 +1,26 @@
 import React, {useState} from 'react'
+import {Link, useParams} from 'react-router-dom'
 import {uniqueId} from 'lodash'
-import {Link} from 'react-router-dom'
 import iconArrowLeft from '../../assets/icon-arrow-left.svg'
 import Button from '../../components/Button/Button.jsx'
 import DefineStatus from '../../components/Status/DefineStatus.jsx'
 import DeletionModal from '../../components/Modal/index.jsx'
 import {prettyCurrency, prettyLocaleDate} from './utils'
-
-const invoice = {
-  id: 'XM9141',
-  paymentDue: '2021-09-20T12:23:21.349752Z',
-  description: 'Graphic Design',
-  paymentTerms: 10,
-  clientName: 'Alex Grim',
-  clientEmail: 'alexgrim@mail.com',
-  status: 'pending',
-  senderAddress: {
-    street: '19 Brooklyn',
-    city: 'New York',
-    postCode: 'E1 3EZ',
-    country: 'USA',
-  },
-  clientAddress: {
-    street: '19 Union Terrace',
-    city: 'London ',
-    postCode: 'E1 3EZ',
-    country: 'United Kingdom',
-  },
-  items: [
-    {
-      name: 'Banner Design',
-      quantity: 1,
-      price: 156,
-      total: 156,
-    },
-    {
-      name: 'Email Design',
-      quantity: 2,
-      price: 200,
-      total: 400,
-    },
-  ],
-  total: 556,
-  createdAt: '2022-06-21T11:36:09.714464Z',
-  updatedAt: '2022-06-21T11:36:09.714464Z',
-}
+import {useGetInvoiceItemQuery} from '../../app/invoiceApi'
 
 function InvoiceDetail() {
   const [openModal, setOpenModal] = useState(false)
+  const {id} = useParams()
+  const {data: invoice, isLoading} = useGetInvoiceItemQuery(id)
 
+  if (isLoading)
+    return (
+      <div className="flex w-full items-center justify-center text-gray-400">
+        Loading...
+      </div>
+    )
   return (
-    <div className="mx-auto w-[45rem] px-6">
+    <div className="px -6 mx-auto w-[45rem]">
       <div className="cursor-pointer py-6">
         <Link to="/">
           <img
