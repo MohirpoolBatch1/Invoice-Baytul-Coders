@@ -33,9 +33,17 @@ export const itemSlice = createSlice({
     clearItemInputs: state => {
       state.itemList = []
     },
+    updateItems: (state, action) => {
+      state.itemList = [...action.payload]
+    },
   },
 })
 
-export const {addNewItem, deleteItem, getInputValues, clearItemInputs} =
-  itemSlice.actions
+export const {
+  addNewItem,
+  deleteItem,
+  getInputValues,
+  clearItemInputs,
+  updateItems,
+} = itemSlice.actions
 export default itemSlice.reducer
