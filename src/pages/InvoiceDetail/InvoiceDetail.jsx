@@ -5,7 +5,7 @@ import iconArrowLeft from '../../assets/icon-arrow-left.svg'
 import Button from '../../components/Button/Button.jsx'
 import DefineStatus from '../../components/Status/DefineStatus.jsx'
 import DeletionModal from '../../components/Modal/index.jsx'
-import {prettyCurrency, prettyLocaleDate} from './utils'
+import {prettyCurrency, prettyLocaleDate} from '../../utils/utils'
 import ItemsInfo from '../../components/ItemsInfo/ItemsInfo.jsx'
 import {invoice} from './mock'
 
