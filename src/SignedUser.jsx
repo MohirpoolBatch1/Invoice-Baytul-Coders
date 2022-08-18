@@ -2,7 +2,7 @@ import React from 'react'
 import {Routes, Route} from 'react-router-dom'
 import Homepage from './pages/Homepage/Homepage.jsx'
 import Sidebar from './components/Sidebar.jsx'
-import InvoiceDetail from './pages/InvoiceDetail/InvoiceDetail.jsx'
+import InvoiceDetail from './pages/InvoiceDeatil/InvoiceDetail.jsx'
 import NotFound from './pages/NotFoud/NotFound.jsx'
 
 const SignedUser = () => (
@@ -10,7 +10,7 @@ const SignedUser = () => (
     <Sidebar />
     <Routes>
       <Route path="/" element={<Homepage />} />
-      <Route path="/invoice/:invoiceId" element={<InvoiceDetail />} />
+      <Route path="/invoice/:id" element={<InvoiceDetail />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   </div>
