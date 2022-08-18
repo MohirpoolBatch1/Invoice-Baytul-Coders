@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import IconArrowDown from '../../assets/icon-arrow-down.svg'
 import Button from '../../components/Button/Button.jsx'
 
-const InvoiceNavbar = ({amountInvoices, statuses, changeHandler}) => {
+const InvoiceNavbar = ({amountInvoices, statuses, changeHandler, openForm}) => {
   const [showFilter, setShowFilter] = useState(false)
 
   useEffect(() => {
@@ -21,7 +21,11 @@ const InvoiceNavbar = ({amountInvoices, statuses, changeHandler}) => {
     <div className="flex items-center justify-between py-16">
       <div>
         <h1 className="text-xl font-bold text-gray-600">Invoices</h1>
-        <p className="text-xs font-normal text-gray-300">{amountInvoices}</p>
+        <p className="text-xs font-normal text-gray-300">
+          {amountInvoices > 0
+            ? `There are ${amountInvoices} total invoices`
+            : 'No invoices'}
+        </p>
       </div>
 
       <div className="relative flex space-x-4">
@@ -45,7 +49,11 @@ const InvoiceNavbar = ({amountInvoices, statuses, changeHandler}) => {
             />
           </span>
         </button>
-        <Button buttonKind="primary-add" className={'px-4 py-2'}>
+        <Button
+          onClick={openForm}
+          buttonKind="primary-add"
+          className={'px-4 py-2'}
+        >
           New <span className="ml-2 hidden tablet:inline"> Invoice</span>
         </Button>
         <div
