@@ -5,6 +5,7 @@ import InvoiceNavbar from './InvoiceNavbar.jsx'
 import InvoiceItem from '../../components/InvoiceItem/InvoiceItem.jsx'
 import FormWindow from '../../components/FormWindow/index.jsx'
 import {useGetAllInvoicesQuery} from '../../app/invoiceApi'
+import Spinner from '../../components/Spinner/Spinner.jsx'
 
 const InvoiceItems = props => (
   <div>
@@ -23,7 +24,7 @@ const InvoiceItems = props => (
 
 const Homepage = () => {
   const [isOpenForm, setIsOpenForm] = useState(false)
-  const {data, isLoading, error} = useGetAllInvoicesQuery()
+  const {data, isLoading, error, isSuccess} = useGetAllInvoicesQuery()
   const [statuses, setStatuses] = useState({
     paid: false,
     pending: false,
@@ -52,18 +53,18 @@ const Homepage = () => {
           changeHandler={changeHandler}
           openForm={() => setIsOpenForm(true)}
         />
-        {isLoading && <h3 className="text-center text-gray-400">Loading...</h3>}
         {error && <h3 className="text-center text-red">{error}</h3>}
         {invoices?.length > 0 ? (
           <InvoiceItems invoices={invoices} />
         ) : (
-          <EmptyPage />
+          isSuccess && <EmptyPage />
         )}
       </div>
       <FormWindow
         closeForm={() => setIsOpenForm(false)}
         isOpenForm={isOpenForm}
       />
+      {isLoading && <Spinner />}
     </>
   )
 }

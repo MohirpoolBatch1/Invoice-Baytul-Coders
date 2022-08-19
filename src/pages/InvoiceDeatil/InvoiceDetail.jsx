@@ -14,6 +14,7 @@ import {
 import FormWindow from '../../components/FormWindow/index.jsx'
 import {updateInvoice} from '../../app/formSlice'
 import {updateItems} from '../../app/itemSlice'
+import Spinner from '../../components/Spinner/Spinner.jsx'
 
 function InvoiceDetail() {
   const [openModal, setOpenModal] = useState(false)
@@ -46,12 +47,8 @@ function InvoiceDetail() {
     navigate('/')
   }
 
-  if (isLoading)
-    return (
-      <div className="flex w-full items-center justify-center text-gray-400">
-        Loading...
-      </div>
-    )
+  if (isLoading) return <Spinner />
+
   return (
     <div className="mx-auto w-[45rem] overflow-y-auto px-6">
       <div className="py-6">
