@@ -11,6 +11,7 @@ module.exports = {
   },
   plugins: ['prettier'],
   rules: {
+    'no-param-reassign': 0,
     'prettier/prettier': 'error',
     'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': ['error', {devDependencies: true}],

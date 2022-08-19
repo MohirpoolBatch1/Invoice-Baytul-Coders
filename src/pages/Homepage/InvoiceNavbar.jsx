@@ -21,7 +21,11 @@ const InvoiceNavbar = ({amountInvoices, statuses, changeHandler, openForm}) => {
     <div className="flex items-center justify-between py-16">
       <div>
         <h1 className="text-xl font-bold text-gray-600">Invoices</h1>
-        <p className="text-xs font-normal text-gray-300">{amountInvoices}</p>
+        <p className="text-xs font-normal text-gray-300">
+          {amountInvoices > 0
+            ? `There are ${amountInvoices} total invoices`
+            : 'No invoices'}
+        </p>
       </div>
 
       <div className="relative flex space-x-4">

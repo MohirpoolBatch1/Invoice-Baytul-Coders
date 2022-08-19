@@ -42,7 +42,10 @@ const FormItemRow = React.memo(({item}) => {
         />
       </div>
       <div className="w-16 text-xs text-gray-300">
-        {getTotalAmount(item.price, item.quantity)}
+        {getTotalAmount(item.price, item.quantity)?.toLocaleString('ru-RU', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }) || '0.00'}
       </div>
       <button onClick={() => dispatch(deleteItem(item.id))} className="mx-2">
         <img src={deleteIcon} alt="delete icon" />
