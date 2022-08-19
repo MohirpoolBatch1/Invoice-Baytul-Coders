@@ -4,6 +4,7 @@ import EmptyPage from './EmptyPage.jsx'
 import InvoiceNavbar from './InvoiceNavbar.jsx'
 import items from '../../data.json'
 import InvoiceItem from '../../components/InvoiceItem/InvoiceItem.jsx'
+import FormWindow from '../../components/FormWindow/index.jsx'
 
 const InvoiceItems = props => (
   <div>
@@ -21,6 +22,7 @@ const InvoiceItems = props => (
 )
 
 const Homepage = () => {
+  const [isOpenForm, setIsOpenForm] = useState(false)
   const [amountInvoices, setAmountInvoices] = useState(
     items.length ? `There are ${items.length} total invoices` : 'No invoices',
   )
@@ -54,18 +56,25 @@ const Homepage = () => {
   }, [statuses, amountInvoices])
 
   return (
-    <div className="mx-auto w-full max-w-[45.6rem] px-6">
-      <InvoiceNavbar
-        amountInvoices={amountInvoices}
-        statuses={statuses}
-        changeHandler={changeHandler}
+    <>
+      <div className="mx-auto w-full max-w-[45.6rem] px-6">
+        <InvoiceNavbar
+          amountInvoices={amountInvoices}
+          statuses={statuses}
+          changeHandler={changeHandler}
+          openForm={() => setIsOpenForm(true)}
+        />
+        {items.length !== 0 ? (
+          <InvoiceItems invoiceItems={invoiceItems} />
+        ) : (
+          <EmptyPage />
+        )}
+      </div>
+      <FormWindow
+        closeForm={() => setIsOpenForm(false)}
+        isOpenForm={isOpenForm}
       />
-      {items.length !== 0 ? (
-        <InvoiceItems invoiceItems={invoiceItems} />
-      ) : (
-        <EmptyPage />
-      )}
-    </div>
+    </>
   )
 }
 
