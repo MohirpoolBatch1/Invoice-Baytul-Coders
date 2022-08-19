@@ -19,10 +19,7 @@ export const itemSlice = createSlice({
       state.itemList.push(newItem)
     },
     deleteItem: (state, action) => {
-      state.itemList.splice(
-        state.itemList.findIndex(item => item.id === action.payload),
-        1,
-      )
+      state.itemList = state.itemList.filter(item => item.id !== action.payload)
     },
     getInputValues: (state, action) => {
       const {name, value, id} = action.payload

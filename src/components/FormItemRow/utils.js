@@ -1,5 +1,5 @@
-export function getTotalAmount(price, quantity) {
-  return price && quantity ? +price * +quantity : 0
+export function getTotalAmount(price = 0, quantity = 0) {
+  return price * quantity
 }
 
 export const convertToNumber = (name, value) => {
