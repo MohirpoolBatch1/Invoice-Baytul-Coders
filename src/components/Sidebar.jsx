@@ -6,8 +6,8 @@ import Theme from '../assets/icon-moon.svg'
 
 function Sidebar() {
   return (
-    <div className="fixed top-0 left-0 h-full w-[6.438rem] rounded-tr-[1.25rem] rounded-br-[1.25rem]">
-      <div className="absolute flex h-[6.438rem] w-[6.438rem] items-center justify-center rounded-br-[1.25rem] rounded-tr-[1.25rem] bg-purple">
+    <div className="sidebar z-10 h-screen w-[6.438rem] rounded-tr-[1.25rem] rounded-br-[1.25rem]">
+      <div className="sidebar-top absolute flex h-[6.438rem] w-[6.438rem] items-center justify-center rounded-br-[1.25rem] rounded-tr-[1.25rem] bg-purple">
         <img src={Logo} alt="Logo" width={40} height={40} className="z-10" />
         <div className="absolute top-[3.188rem] h-[3.25rem] w-[6.438rem] rounded-tl-[1.25rem] rounded-br-[1.25rem] bg-purple-light"></div>
       </div>
