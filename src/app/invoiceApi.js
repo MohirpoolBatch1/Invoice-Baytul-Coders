@@ -30,6 +30,14 @@ export const invoiceApi = createApi({
       }),
       invalidatesTags: ['Invoice'],
     }),
+    saveAsDraft: builder.mutation({
+      query: invoice => ({
+        url: '/invoice',
+        method: 'POST',
+        body: invoice,
+      }),
+      invalidatesTags: ['Invoice'],
+    }),
   }),
 })
 
@@ -38,4 +46,5 @@ export const {
   useDeleteInvoiceMutation,
   useGetInvoiceItemQuery,
   useAddInvoiceMutation,
+  useSaveAsDraftMutation,
 } = invoiceApi

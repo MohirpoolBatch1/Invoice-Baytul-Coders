@@ -10,7 +10,7 @@ const SignedUser = () => (
     <Sidebar />
     <Routes>
       <Route path="/" element={<Homepage />} />
-      <Route path="/invoice/:invoiceId" element={<InvoiceDetail />} />
+      <Route path="/invoice/:id" element={<InvoiceDetail />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   </div>
