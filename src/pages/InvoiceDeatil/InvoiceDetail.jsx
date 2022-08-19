@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Link, useParams} from 'react-router-dom'
+import {Link, useParams, useNavigate} from 'react-router-dom'
 import {uniqueId} from 'lodash'
 import {useDispatch} from 'react-redux'
 import iconArrowLeft from '../../assets/icon-arrow-left.svg'
@@ -7,7 +7,10 @@ import Button from '../../components/Button/Button.jsx'
 import DefineStatus from '../../components/Status/DefineStatus.jsx'
 import DeletionModal from '../../components/Modal/index.jsx'
 import {prettyCurrency, prettyLocaleDate} from '../../utils/utils'
-import {useGetInvoiceItemQuery} from '../../app/invoiceApi'
+import {
+  useGetInvoiceItemQuery,
+  useUpdateInvioceMutation,
+} from '../../app/invoiceApi'
 import FormWindow from '../../components/FormWindow/index.jsx'
 import {updateInvoice} from '../../app/formSlice'
 import {updateItems} from '../../app/itemSlice'
@@ -18,11 +21,29 @@ function InvoiceDetail() {
   const {id} = useParams()
   const dispatch = useDispatch()
   const {data: invoice, isLoading} = useGetInvoiceItemQuery(id)
+  const [updateInvoiceApi] = useUpdateInvioceMutation()
+  const navigate = useNavigate()
 
   const onClickEditButton = () => {
     dispatch(updateInvoice(invoice))
     dispatch(updateItems(invoice.items))
     setIsEditForm(true)
+  }
+
+  const handleMarkAsPaid = async () => {
+    const {senderAddress, clientAddress, items, status, ...otherData} = invoice
+    await updateInvoiceApi({
+      status: 'paid',
+      ...otherData,
+      senderAddress,
+      clientAddress,
+      items: {
+        createdItems: [],
+        modifiedItems: items,
+        deletedItems: [],
+      },
+    })
+    navigate('/')
   }
 
   if (isLoading)
@@ -58,7 +79,9 @@ function InvoiceDetail() {
           <Button onClick={() => setOpenModal(true)} buttonKind={'danger'}>
             delete
           </Button>
-          <Button buttonKind={'primary'}>mark as paid</Button>
+          <Button onClick={handleMarkAsPaid} buttonKind={'primary'}>
+            mark as paid
+          </Button>
         </div>
       </div>
 
