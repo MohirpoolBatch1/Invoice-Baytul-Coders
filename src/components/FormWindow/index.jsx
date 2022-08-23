@@ -118,9 +118,15 @@ function FormWindow({isOpenForm, closeForm, editable, invoiceId}) {
 
   return (
     <div
-      className={`${isOpenForm ? null : 'hidden'} fixed inset-0 bg-gray-700/40`}
+      className={`${
+        isOpenForm ? 'visible opacity-100' : 'invisible opacity-0'
+      } fixed inset-0 bg-gray-700/40 transition-all duration-500`}
     >
-      <div className=" flex h-screen max-w-[44rem] flex-col justify-between rounded-[1.25rem] bg-white p-[3.5rem] pl-40 ">
+      <div
+        className={`${
+          isOpenForm ? 'translate-x-0' : '-translate-x-full'
+        } flex h-screen max-w-[44rem] flex-col justify-between rounded-[1.25rem] bg-white p-[3.5rem] pl-40 transition-all duration-500 `}
+      >
         <div className="overflow-y-auto  p-2 pr-4">
           <h1 className="mb-8 font-bold text-gray-600">
             {editable ? (

@@ -47,7 +47,7 @@ function InvoiceDetail() {
     navigate('/')
   }
 
-  if (isLoading) return <Spinner />
+  if (isLoading) return <Spinner isOpen={isLoading} />
 
   return (
     <div className="mx-auto w-[45rem] overflow-y-auto px-6">

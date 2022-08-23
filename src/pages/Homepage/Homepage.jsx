@@ -64,7 +64,7 @@ const Homepage = () => {
         closeForm={() => setIsOpenForm(false)}
         isOpenForm={isOpenForm}
       />
-      {isLoading && <Spinner />}
+      <Spinner isOpen={isLoading} />
     </>
   )
 }
