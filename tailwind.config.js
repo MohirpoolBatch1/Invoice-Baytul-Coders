@@ -22,7 +22,7 @@ module.exports = {
       },
       purple: {
         DEFAULT: '#7C5DFA',
-        light: '#9277FF',
+        light: '#9277FF', // purple-light
       },
       gray: {
         800: '#1E2139',
