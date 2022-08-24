@@ -1,17 +1,29 @@
 import React, {useState} from 'react'
 import {Link, useParams} from 'react-router-dom'
 import {uniqueId} from 'lodash'
+import {useDispatch} from 'react-redux'
 import iconArrowLeft from '../../assets/icon-arrow-left.svg'
 import Button from '../../components/Button/Button.jsx'
 import DefineStatus from '../../components/Status/DefineStatus.jsx'
 import DeletionModal from '../../components/Modal/index.jsx'
-import {prettyCurrency, prettyLocaleDate} from './utils'
+import {prettyCurrency, prettyLocaleDate} from '../../utils/utils'
 import {useGetInvoiceItemQuery} from '../../app/invoiceApi'
+import FormWindow from '../../components/FormWindow/index.jsx'
+import {updateInvoice} from '../../app/formSlice'
+import {updateItems} from '../../app/itemSlice'
 
 function InvoiceDetail() {
   const [openModal, setOpenModal] = useState(false)
+  const [isEditForm, setIsEditForm] = useState(false)
   const {id} = useParams()
+  const dispatch = useDispatch()
   const {data: invoice, isLoading} = useGetInvoiceItemQuery(id)
+
+  const onClickEditButton = () => {
+    dispatch(updateInvoice(invoice))
+    dispatch(updateItems(invoice.items))
+    setIsEditForm(true)
+  }
 
   if (isLoading)
     return (
@@ -20,15 +32,17 @@ function InvoiceDetail() {
       </div>
     )
   return (
-    <div className="px -6 mx-auto w-[45rem]">
-      <div className="cursor-pointer py-6">
+    <div className="mx-auto w-[45rem] overflow-y-auto px-6">
+      <div className="py-6">
         <Link to="/">
           <img
             src={iconArrowLeft}
             className="mr-4 inline text-purple"
             alt="icon arrow left"
           />
-          <span className="font-bold text-gray-600">Go back </span>
+          <span className="font-bold text-gray-600 hover:text-gray-400 ">
+            Go back{' '}
+          </span>
         </Link>
       </div>
 
@@ -38,7 +52,9 @@ function InvoiceDetail() {
           <DefineStatus status={invoice.status} />
         </div>
         <div className="flex items-center space-x-2">
-          <Button buttonKind={'edit'}>edit</Button>
+          <Button onClick={onClickEditButton} buttonKind={'edit'}>
+            edit
+          </Button>
           <Button onClick={() => setOpenModal(true)} buttonKind={'danger'}>
             delete
           </Button>
@@ -129,6 +145,12 @@ function InvoiceDetail() {
         isOpen={openModal}
         closeModal={() => setOpenModal(false)}
         invoiceId={invoice.id}
+      />
+      <FormWindow
+        invoiceId={invoice.id}
+        editable={true}
+        isOpenForm={isEditForm}
+        closeForm={() => setIsEditForm(false)}
       />
     </div>
   )

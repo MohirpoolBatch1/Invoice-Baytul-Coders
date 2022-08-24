@@ -18,7 +18,7 @@ import {
   clearInputs,
 } from '../../app/formSlice'
 
-function FormWindow({isOpenForm, closeForm}) {
+function FormWindow({isOpenForm, closeForm, editable, invoiceId}) {
   const [paymentDue, setPaymentDue] = useState(new Date())
   const [terms, setTerms] = useState(netDays[0])
 
@@ -95,7 +95,16 @@ function FormWindow({isOpenForm, closeForm}) {
     >
       <div className=" flex h-screen max-w-[44rem] flex-col justify-between rounded-[1.25rem] bg-white p-[3.5rem] pl-40 ">
         <div className="overflow-y-auto  p-2 pr-4">
-          <h1 className="mb-8 font-bold text-gray-600">New invoice</h1>
+          <h1 className="mb-8 font-bold text-gray-600">
+            {editable ? (
+              <span>
+                Edit <span className="text-gray-400">#</span>
+                {invoiceId.toUpperCase()}
+              </span>
+            ) : (
+              'New invoice'
+            )}
+          </h1>
           <p className="mb-4 text-purple">Bill From</p>
           <FormInput
             value={senderAddress.street}
@@ -186,6 +195,7 @@ function FormWindow({isOpenForm, closeForm}) {
           </div>
           <div className="mb-4 flex space-x-4">
             <DataPicker
+              disabled={editable}
               labelContent={'Invoice Date'}
               paymentDue={paymentDue}
               handleChange={date => setPaymentDue(date)}
@@ -224,22 +234,31 @@ function FormWindow({isOpenForm, closeForm}) {
             + Add New Item
           </Button>
         </div>
-        <div className="flex items-center justify-between pt-6 ">
-          <Button onClick={clickedDiscard} buttonKind="edit">
-            Discard
-          </Button>
-          <div className="flex space-x-2 ">
-            <Button
-              onClick={() => handleAddInvoice('draft')}
-              buttonKind="cancel"
-            >
-              Save as Draft
+        {editable ? (
+          <div className="flex items-center justify-end space-x-2 pt-6 ">
+            <Button onClick={clickedDiscard} buttonKind="edit">
+              Cancel
             </Button>
-            <Button onClick={handleAddInvoice} buttonKind="primary">
-              Save & Send
-            </Button>
+            <Button buttonKind="primary">Save Changes</Button>
           </div>
-        </div>
+        ) : (
+          <div className="flex items-center justify-between pt-6 ">
+            <Button onClick={clickedDiscard} buttonKind="edit">
+              Discard
+            </Button>
+            <div className="flex space-x-2 ">
+              <Button
+                onClick={() => handleAddInvoice('draft')}
+                buttonKind="cancel"
+              >
+                Save as Draft
+              </Button>
+              <Button onClick={handleAddInvoice} buttonKind="primary">
+                Save & Send
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
 import uniqueId from 'lodash/uniqueId'
-import {convertToNumber, getTotalAmount} from '../components/FormItemRow/utils'
+import {convertToNumber, getTotalAmount} from '../utils/utils'
 
 export const itemSlice = createSlice({
   name: 'items',
@@ -33,9 +33,17 @@ export const itemSlice = createSlice({
     clearItemInputs: state => {
       state.itemList = []
     },
+    updateItems: (state, action) => {
+      state.itemList = [...action.payload]
+    },
   },
 })
 
-export const {addNewItem, deleteItem, getInputValues, clearItemInputs} =
-  itemSlice.actions
+export const {
+  addNewItem,
+  deleteItem,
+  getInputValues,
+  clearItemInputs,
+  updateItems,
+} = itemSlice.actions
 export default itemSlice.reducer

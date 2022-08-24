@@ -1,5 +1,5 @@
 import React from 'react'
-import {prettyCurrency} from '../../pages/InvoiceDetail/utils'
+import {prettyCurrency} from '../../utils/utils'
 
 function ItemsInfo({name, quantity, price, total}) {
   return (

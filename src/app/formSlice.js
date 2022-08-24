@@ -42,9 +42,28 @@ export const formSlice = createSlice({
       state.senderAddress = {...initialState.senderAddress}
       state.generalData = {...initialState.generalData}
     },
+    updateInvoice: (state, action) => {
+      const {
+        clientName,
+        clientEmail,
+        description,
+        senderAddress,
+        clientAddress,
+      } = action.payload
+      state.generalData.clientName = clientName
+      state.generalData.clientEmail = clientEmail
+      state.generalData.description = description
+      state.senderAddress = senderAddress
+      state.clientAddress = clientAddress
+    },
   },
 })
 
-export const {getGeneralData, getSenderAddress, getClientAddress, clearInputs} =
-  formSlice.actions
+export const {
+  getGeneralData,
+  getSenderAddress,
+  getClientAddress,
+  clearInputs,
+  updateInvoice,
+} = formSlice.actions
 export default formSlice.reducer

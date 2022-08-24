@@ -2,7 +2,7 @@ import React from 'react'
 import {useDispatch} from 'react-redux'
 import FormInput from '../FormInput/FormInput.jsx'
 import deleteIcon from '../../assets/icon-delete.svg'
-import {getTotalAmount} from './utils'
+import {getTotalAmount} from '../../utils/utils'
 import {deleteItem, getInputValues} from '../../app/itemSlice'
 
 const FormItemRow = React.memo(({item}) => {

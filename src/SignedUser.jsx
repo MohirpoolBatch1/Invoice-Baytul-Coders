@@ -2,7 +2,7 @@ import React from 'react'
 import {Routes, Route} from 'react-router-dom'
 import Homepage from './pages/Homepage/Homepage.jsx'
 import Sidebar from './components/Sidebar.jsx'
-import InvoiceDetail from './pages/InvoiceDeatil/InvoiceDetail.jsx'
+import InvoiceDetail from './pages/InvoiceDeatil/index.jsx'
 import NotFound from './pages/NotFoud/NotFound.jsx'
 
 const SignedUser = () => (
