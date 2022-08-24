@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
 import uniqueId from 'lodash/uniqueId'
-import {convertToNumber, getTotalAmount} from '../components/FormItemRow/utils'
+import {convertToNumber, getTotalAmount} from '../utils/utils'
 
 export const itemSlice = createSlice({
   name: 'items',

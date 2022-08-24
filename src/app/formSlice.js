@@ -38,9 +38,9 @@ export const formSlice = createSlice({
       state.clientAddress[name] = value
     },
     clearInputs: state => {
-      state.clientAddress = initialState.clientAddress
-      state.senderAddress = initialState.senderAddress
-      state.generalData = initialState.generalData
+      state.clientAddress = {...initialState.clientAddress}
+      state.senderAddress = {...initialState.senderAddress}
+      state.generalData = {...initialState.generalData}
     },
     updateInvoice: (state, action) => {
       const {
