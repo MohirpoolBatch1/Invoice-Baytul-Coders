@@ -8,9 +8,12 @@ import DeletionModal from '../../components/Modal/index.jsx'
 import {prettyCurrency, prettyLocaleDate} from './utils'
 import ItemsInfo from '../../components/ItemsInfo/ItemsInfo.jsx'
 import {invoice} from './mock'
+import {Context as ThemeContext} from '../../context/theme.jsx'
 
 function InvoiceDetail() {
   const [openModal, setOpenModal] = useState(false)
+
+  const {theme} = React.useContext(ThemeContext)
 
   return (
     <div className="mx-auto flex w-full max-w-[45.625rem] items-center justify-center pt-16">
@@ -20,16 +23,30 @@ function InvoiceDetail() {
           className="mb-8 flex w-full max-w-[5.063rem] items-center justify-between"
         >
           <img src={iconArrowLeft} alt="Go back" />
-          <p className="font-spartan text-body-1 font-bold tracking-[-0.0156rem]">
+          <p
+            className={`font-spartan text-body-1 font-bold tracking-[-0.0156rem] ${
+              theme
+                ? 'text-white hover:text-gray-300'
+                : 'text-gray-600 hover:text-gray-400'
+            }`}
+          >
             Go back
           </p>
         </Link>
-        <div className="mb-6 overflow-y-auto rounded-lg bg-white py-3 px-5 shadow-[0_10px_10px_-10px_rgba(72,84,159,0.100397)]">
+        <div
+          className={`"mb-6 shadow-[0_10px_10px_-10px_rgba(72,84,159,0.100397)]" overflow-y-auto rounded-lg py-3 px-5 ${
+            theme ? 'bg-gray-800' : 'bg-white'
+          }`}
+        >
           <div className="flex w-full items-center justify-between">
             <div className="flex w-[9.938rem] justify-between">
               <div className="flex w-[9.938rem] items-center justify-between">
                 <div>
-                  <p className="full text-body-1 font-medium tracking-[-0.0156rem] text-gray-400">
+                  <p
+                    className={`"full text-gray-400" text-body-1 font-medium tracking-[-0.0156rem] ${
+                      theme ? 'text-gray-200' : 'text-gray-400'
+                    }`}
+                  >
                     Status
                   </p>
                 </div>
@@ -40,7 +57,11 @@ function InvoiceDetail() {
               <div className="flex w-[19.313rem] items-center justify-between">
                 <Button
                   buttonKind="edit"
-                  className="bg-[#f9fafe] py-4 px-7 hover:bg-gray-200 hover:text-gray-400"
+                  className={`hover:text-gray-400" py-4 px-7 ${
+                    theme
+                      ? 'bg-gray-500 text-gray-200 hover:bg-white hover:text-gray-400'
+                      : 'bg-[#f9fafe] text-gray-400 hover:bg-gray-200'
+                  }`}
                 >
                   Edit
                 </Button>
@@ -61,19 +82,35 @@ function InvoiceDetail() {
             </div>
           </div>
         </div>
-        <div className="rounded-lg bg-white py-12 shadow-[0_10px_10px_-10px_rgba(72,84,159,0.100397)]">
+        <div
+          className={`"rounded-lg shadow-[0_10px_10px_-10px_rgba(72,84,159,0.100397)]" py-12 ${
+            theme ? 'bg-gray-800' : 'bg-white'
+          }`}
+        >
           <div className="mx-auto w-full max-w-[39.625rem]">
             <div className="mb-[1.313rem] flex items-start justify-between">
               <div>
-                <h4 className="full mb-2 text-base font-bold">
+                <h4
+                  className={`full mb-2 text-base font-bold ${
+                    theme ? 'text-gray-200' : 'text-gray-600'
+                  }`}
+                >
                   <span className="text-gray-400">#</span>
                   {invoice.id}
                 </h4>
-                <p className="text-xs font-medium text-gray-400">
+                <p
+                  className={`text-xs font-medium ${
+                    theme ? 'text-gray-200' : 'text-gray-400'
+                  }`}
+                >
                   Graphic Design
                 </p>
               </div>
-              <p className="text-right text-body-2 font-medium text-gray-400">
+              <p
+                className={`text-right text-body-2 font-medium ${
+                  theme ? 'text-gray-200' : 'text-gray-400'
+                }`}
+              >
                 {invoice.senderAddress.street} <br />
                 {invoice.senderAddress.city} <br />
                 {invoice.senderAddress.postCode} <br />
@@ -83,33 +120,61 @@ function InvoiceDetail() {
             <div className="mb-[2.813rem] flex justify-between">
               <div className="flex flex-col justify-between">
                 <div>
-                  <h6 className="mb-3 text-body-1 font-medium text-gray-400">
+                  <h6
+                    className={`mb-3 text-body-1 font-medium ${
+                      theme ? 'text-gray-200' : 'text-gray-400'
+                    }`}
+                  >
                     Invoice Date
                   </h6>
-                  <p className="text-base font-bold text-gray-600">
+                  <p
+                    className={`text-base font-bold ${
+                      theme ? 'text-gray-200' : 'text-gray-600'
+                    }`}
+                  >
                     {prettyLocaleDate(invoice.createdAt)}
                   </p>
                 </div>
-                <div className="">
-                  <h6 className="mb-3 text-body-1 font-medium text-gray-400">
+                <div>
+                  <h6
+                    className={`mb-3 text-body-1 font-medium ${
+                      theme ? 'text-gray-200' : 'text-gray-400'
+                    }`}
+                  >
                     Payment Due
                   </h6>
-                  <p className="text-base font-bold text-gray-600">
+                  <p
+                    className={`text-base font-bold ${
+                      theme ? 'text-gray-200' : 'text-gray-600'
+                    }`}
+                  >
                     {prettyLocaleDate(invoice.paymentDue)}
                   </p>
                 </div>
               </div>
               <div>
                 <div className="mb-3">
-                  <h6 className="mb-3 text-body-1 font-medium text-gray-400">
+                  <h6
+                    className={`mb-3 text-body-1 font-medium ${
+                      theme ? 'text-gray-200' : 'text-gray-400'
+                    }`}
+                  >
                     Bill To
                   </h6>
-                  <p className="text-base font-bold text-gray-600">
+                  <p
+                    className={`text-base font-bold ${
+                      theme ? 'text-gray-200' : 'text-gray-600'
+                    }`}
+                  >
                     {invoice.clientName}
                   </p>
                 </div>
                 <div className="flex flex-col">
-                  <p className="text-body-2 font-medium text-gray-400">
+                  <p
+                    className={`text-body-2 font-medium ${
+                      theme ? 'text-gray-200' : 'text-gray-400'
+                    }`}
+                  >
                     {invoice.clientAddress.street} <br />
                     {invoice.clientAddress.city} <br />
                     {invoice.clientAddress.postCode} <br />
@@ -118,28 +183,56 @@ function InvoiceDetail() {
                 </div>
               </div>
               <div>
-                <h6 className="text-body-1 font-medium text-gray-400">
+                <h6
+                  className={`text-body-1 font-medium ${
+                    theme ? 'text-gray-200' : 'text-gray-400'
+                  }`}
+                >
                   Sent to
                 </h6>
-                <p className="text-base font-bold text-gray-600">
+                <p
+                  className={`text-base font-bold ${
+                    theme ? 'text-gray-200' : 'text-gray-600'
+                  }`}
+                >
                   {invoice.clientEmail}
                 </p>
               </div>
             </div>
             <div className="w-full rounded-t-lg rounded-r-lg">
-              <div className="rounded-t-lg bg-[#F9FAFE]">
+              <div
+                className={`rounded-t-lg ${
+                  theme ? 'bg-gray-500' : 'bg-[#F9FAFE]'
+                }`}
+              >
                 <div className="mx-auto max-w-[35.625rem] pt-8">
                   <div className="justify-space-between flex w-full">
-                    <p className="w-full max-w-[17.875rem] pb-8 text-left text-body-2 font-medium text-gray-400">
+                    <p
+                      className={`w-full max-w-[17.875rem] pb-8 text-left text-body-2 font-medium ${
+                        theme ? 'text-gray-200' : 'text-gray-400'
+                      }`}
+                    >
                       Item Name
                     </p>
-                    <p className="w-full max-w-[1.875rem] pb-8 text-center text-body-2 font-medium text-gray-400">
+                    <p
+                      className={`w-full max-w-[1.875rem] pb-8 text-center text-body-2 font-medium ${
+                        theme ? 'text-gray-200' : 'text-gray-400'
+                      }`}
+                    >
                       QTY.
                     </p>
-                    <p className="w-full max-w-[7.375rem] pb-8 text-right text-body-2 font-medium text-gray-400">
+                    <p
+                      className={`w-full max-w-[7.375rem] pb-8 text-right text-body-2 font-medium ${
+                        theme ? 'text-gray-200' : 'text-gray-400'
+                      }`}
+                    >
                       Price
                     </p>
-                    <p className="w-full max-w-[8.563rem] pb-8 text-right text-body-2 font-medium text-gray-400">
+                    <p
+                      className={`w-full max-w-[8.563rem] pb-8 text-right text-body-2 font-medium ${
+                        theme ? 'text-gray-200' : 'text-gray-400'
+                      }`}
+                    >
                       Total
                     </p>
                   </div>
@@ -150,7 +243,11 @@ function InvoiceDetail() {
                   </ul>
                 </div>
               </div>
-              <div className="rounded-b-lg bg-[#373B53] py-6">
+              <div
+                className={`rounded-b-lg py-6 ${
+                  theme ? 'bg-gray-600' : 'bg-[#373B53]'
+                }`}
+              >
                 <div className="mx-auto flex max-w-[35.625rem] items-center justify-between">
                   <div>
                     <p className="text-body-2 font-medium text-white">

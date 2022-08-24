@@ -23,9 +23,21 @@ export const store = configureStore({
   reducer: {
     counter: counterReducer,
     [invoiceApi.reducerPath]: invoiceApi.reducer,
+<<<<<<< HEAD
     formData: formReducer,
     itemList: itemReducer,
+=======
+>>>>>>> 204f848 (feat(SSP-56): Finished theme-changing-functionality UI)
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(invoiceApi.middleware),
 })
+
+export const themeReducer = (action, state = {cash: false}) => {
+  switch (action.type) {
+    case false:
+      return {...state, cash: state.cash + action.payload}
+    default:
+      return state
+  }
+}
